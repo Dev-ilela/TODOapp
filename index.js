@@ -22,12 +22,13 @@ var userArgs = process.argv.slice(2);
 var mongoURL = userArgs[0];
 //Configurando a conexao com o Banco de Dados
 var mongoose = require('mongoose');
+var mongoURL = process.env.MONGODB_URI; // Pega a URI do Render
 mongoose.connect(mongoURL);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', (error) => {
     console.log(error)
-})
+});
 db.once('connected', () => {
     console.log('Database Connected');
-})
+});
